@@ -1,0 +1,36 @@
+@if (msgError) {
+    <p class="text-center alert alert-danger w-25 mx-auto my-3">{{msgError}}</p>
+}
+
+<form action="" class="w-50 mx-auto my-5" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="my-4">
+        <label for="">email</label>
+        <input class="form-control" type="text" formControlName="email">
+        @if (loginForm.get('email')?.touched) {
+            <div class="">
+                @if (loginForm.get('email')?.getError('required')) {
+                <p class="text-danger alert alert-danger">email is req</p>
+                }
+                @else if  (loginForm.get('email')?.getError('email')) {
+                <p class="text-danger alert alert-danger">email is not correct</p>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-4">
+        <label for="">password</label>
+        <input class="form-control" type="password" formControlName="password">
+        @if (loginForm.get('password')?.touched) {
+            <div class="">
+                @if (loginForm.get('password')?.getError('required')) {
+                <p class="text-danger alert alert-danger">password is req</p>
+                }
+                @else if  (loginForm.get('password')?.getError('pattern')) {
+                <p class="text-danger alert alert-danger">password is not valid</p>
+                }
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+</form>

@@ -1,0 +1,102 @@
+@if (errMsg) {
+    <p class="text-center alert alert-danger w-25 mx-auto my-3">{{errMsg}}</p>
+}
+
+<form action="" class=" w-50 mx-auto" [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="my-4">
+        <label for="">name</label>
+        <input type="text" class="form-control" formControlName="name" [ngClass]="{
+            'is-valid': !registerForm.get('name')?.errors && registerForm.get('name')?.touched,
+            'is-invalid': registerForm.get('name')?.errors && registerForm.get('name')?.touched,
+            }">
+
+        @if (registerForm.get('name')?.touched) {
+            <div class="">
+                @if (registerForm.get('name')?.getError('required')) {
+                <p class="text-danger alert alert-danger">name is req</p>
+                }
+                @else if  (registerForm.get('name')?.getError('minlength')) {
+                <p class="text-danger alert alert-danger">name must be greater than 3 characters</p>
+                }
+            </div>
+        }
+    </div>
+    <div class="my-4">
+        <label for="">email</label>
+        <input type="email" class="form-control" formControlName="email" [ngClass]="{
+            'is-valid': !registerForm.get('email')?.errors && registerForm.get('email')?.touched,
+            'is-invalid': registerForm.get('email')?.errors && registerForm.get('email')?.touched,
+            }">
+    
+        @if (registerForm.get('email')?.touched) {
+            <div class="">
+                @if (registerForm.get('email')?.getError('required')) {
+                <p class="text-danger alert alert-danger">email is req</p>
+                }
+                @else if (registerForm.get('email')?.getError('email')) {
+                <p class="text-danger alert alert-danger">email shape is required</p>
+                }
+            </div>
+        }
+    
+    </div>
+    <div class="my-4">
+        <label for="">password</label>
+        <input type="password" class="form-control" formControlName="password" [ngClass]="{
+            'is-valid': !registerForm.get('password')?.errors && registerForm.get('password')?.touched,
+            'is-invalid': registerForm.get('password')?.errors && registerForm.get('password')?.touched,
+            }">
+    
+        @if (registerForm.get('password')?.touched) {
+            <div class="">
+                @if (registerForm.get('password')?.getError('required')) {
+                <p class="text-danger alert alert-danger">password is req</p>
+                }
+                @else if  (registerForm.get('password')?.getError('pattern')) {
+                <p class="text-danger alert alert-danger">password pattern doesnt match</p>
+                }
+            </div>
+        }
+    
+    </div>
+    <div class="my-4">
+        <label for="">age</label>
+        <input type="number" class="form-control" formControlName="age" [ngClass]="{
+            'is-valid': !registerForm.get('age')?.errors && registerForm.get('age')?.touched,
+            'is-invalid': registerForm.get('age')?.errors && registerForm.get('age')?.touched,
+            }">
+
+        @if (registerForm.get('age')?.touched) {
+            <div class="">
+                @if (registerForm.get('age')?.getError('required')) {
+                <p class="text-danger alert alert-danger">age is req</p>
+                }
+                @else if  (registerForm.get('age')?.getError('min')) {
+                <p class="text-danger alert alert-danger">must be older than 20</p>
+                }
+            </div>
+        }
+
+    </div>
+    <div class="my-4">
+        <label for="">phone</label>
+        <input type="tel" class="form-control" formControlName="phone" [ngClass]="{
+            'is-valid': !registerForm.get('phone')?.errors && registerForm.get('phone')?.touched,
+            'is-invalid': registerForm.get('phone')?.errors && registerForm.get('phone')?.touched,
+            }">
+    
+        @if (registerForm.get('phone')?.touched) {
+            <div class="">
+                @if (registerForm.get('phone')?.getError('required')) {
+                <p class="text-danger alert alert-danger">phone is req</p>
+                }
+                @else if  (registerForm.get('phone')?.getError('pattern')) {
+                <p class="text-danger alert alert-danger">must be egyptian number</p>
+                }
+            </div>
+        }
+    
+    </div>
+
+    <button [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+</form>
